@@ -38,13 +38,13 @@ group tabs with `tabs` block, internal structure does not matter
 
 ### simple usage
 ```javascript
-import initTabs from 'tabs';
+import initTabs from 'future-tabs';
 initTabs('.tabs');
 ```
 
 ### extended usage
 ```javascript
-import {Tabs} from 'tabs';
+import {Tabs} from 'future-tabs';
 tabs = new Tabs(document.querySelector('.tabs'));
 ```
 
