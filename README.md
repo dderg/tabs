@@ -49,5 +49,5 @@ gulp
 
 ### changelog
 
-####0.1.0
+#### 1.0.0-alpha
 - you are welcome to use it and contribute
