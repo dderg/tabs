@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>tabs test</title>
+	<script type="text/javascript" src="./browser-polyfill.js"></script>
+	<script>
+		// use browserify instead of this shit, i was just too lazy to install gulp again;
+		var module = {
+			exports: {}
+		}
+		var exports = module.exports;
+	</script>
+	<style>
+		body {
+			font-size: 18px;
+			font-family: arial;
+		}
+		.tabs__toggle {
+			display: inline-block;
+			cursor: pointer;
+			color: #ccc;
+			margin: 0 5px;
+			padding: 5px 10px;
+			border: 1px solid #ccc;
+		}
+		.tabs__toggle_active {
+			cursor: default;
+			color: black;
+			border: 1px solid black;
+		}
+		.tabs__tab {
+			padding-top: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div class="tabs">
+		<div class="tabs__toggle tabs__toggle_active">tab 1</div>
+		<div class="tabs__toggle">tab 2</div>
+		<div class="tabs__tab">tab 1 content</div>
+		<div class="tabs__tab">tab 2 content</div>
+	</div>
+	<script type="text/javascript" src="../dist/tabs.es5.js"></script>
+	<script>
+		var initTabs = module.exports['default']; // var initTabs = require('tabs');
+		initTabs('.tabs');
+	</script>
+</body>
+</html>
