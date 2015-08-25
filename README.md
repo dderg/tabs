@@ -11,8 +11,13 @@ there's also [gulp version](https://github.com/deepak1556/gulp-browserify)
 
 
 ### install
+#### with npm
 ```bash
 npm i -S future-tabs
+```
+#### with bower
+```bash
+bower i -S future-tabs
 ```
 
 ### markup

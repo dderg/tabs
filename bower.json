@@ -1,0 +1,27 @@
+{
+  "name": "future-tabs",
+  "version": "1.0.0",
+  "homepage": "https://github.com/prog666/tabs",
+  "authors": [
+    "Danila Dergachev <gnomdan@yandex.ru>"
+  ],
+  "description": "es6/commonjs tabs module",
+  "main": "/dist/tabs.js",
+  "keywords": [
+    "tabs",
+    "javascript",
+    "nojquery",
+    "es6",
+    "tab"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "src",
+    "examples"
+  ]
+}
