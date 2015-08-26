@@ -14,6 +14,8 @@ use [browserify](http://browserify.org/) with [babelify extension](https://githu
 there's also [gulp version](https://github.com/deepak1556/gulp-browserify)
 
 
+[simple demo](http://front-end.fmake.ru/future-tabs/examples/)
+
 
 ### install
 #### with npm
@@ -45,7 +47,7 @@ initTabs('.tabs');
 ### extended usage
 ```javascript
 import {Tabs} from 'future-tabs';
-tabs = new Tabs(document.querySelector('.tabs'));
+const tabs = new Tabs(document.querySelector('.tabs'));
 ```
 
 ### build

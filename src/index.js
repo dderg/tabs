@@ -1,8 +1,8 @@
 class Tab {
     /**
      * @param  {Tabs}   tabs   Instance of Tabs which contains this tab
-     * @param  {[type]} toggle toggle button
-     * @param  {[type]} tab    block to hide or show
+     * @param  {Dom}    toggle toggle button
+     * @param  {Dom}    tab    block to hide or show
      */
     constructor (tabs, toggle, tab) {
         this.tabs = tabs;
@@ -63,7 +63,7 @@ export class Tabs {
             console.warn('There\'s no toggles for tabs');
             return false;
         } else if (this.tabs.length === 0) {
-            console.wark('There\'s no content tabs');
+            console.warn('There\'s no content tabs');
             return false;
         }
         return true;
