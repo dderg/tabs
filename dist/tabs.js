@@ -1,8 +1,8 @@
 class Tab {
     /**
      * @param  {Tabs}   tabs   Instance of Tabs which contains this tab
-     * @param  {[type]} toggle toggle button
-     * @param  {[type]} tab    block to hide or show
+     * @param  {Dom}    toggle toggle button
+     * @param  {Dom}    tab    block to hide or show
      */
     constructor (tabs, toggle, tab) {
         this.tabs = tabs;
@@ -10,8 +10,9 @@ class Tab {
         this.tab = tab;
         this.init();
     }
+
     init () {
-        if (this.toggle.classList.contains('tabs__toggle_active')) {
+        if (this.toggle.classList.contains(this.tabs.activeToggleClassName)) {
             this.open();
         } else {
             this.close();
@@ -21,6 +22,7 @@ class Tab {
             this.open();
         });
     }
+
     open () {
         if (this.tabs.active === this) {
             // already open
@@ -31,22 +33,26 @@ class Tab {
         }
         this.tabs.active = this;
         this.tab.style.display = 'block';
-        this.toggle.classList.add('tabs__toggle_active');
+        this.toggle.classList.add(this.tabs.activeToggleClassName);
     }
+
     close () {
         this.tab.style.display = 'none';
-        this.toggle.classList.remove('tabs__toggle_active');
+        this.toggle.classList.remove(this.tabs.activeToggleClassName);
     }
 }
 
 export class Tabs {
-    constructor (container) {
+    constructor (container, blockClassName = 'tabs') {
         this.container = container;
+        this.setClassNames(blockClassName);
+
         this.init();
     }
+
     init () {
-        this.toggles = this.container.querySelectorAll('.tabs__toggle');
-        this.tabs = this.container.querySelectorAll('.tabs__tab');
+        this.toggles = this.container.querySelectorAll(this.toggleSelector);
+        this.tabs = this.container.querySelectorAll(this.tabSelector);
         if (!this.isEverythingOk()) {
             return;
         }
@@ -55,6 +61,18 @@ export class Tabs {
             new Tab (this, this.toggles[index], this.tabs[index]);
         }
     }
+
+    /**
+     * Initializes classes and selectors for blocks
+     * @param {String} blockClassName 'tabs' by default
+     */
+    setClassNames (blockClassName) {
+        this.blockClassName = blockClassName;
+        this.toggleSelector = `.${blockClassName}__toggle`;
+        this.tabSelector = `.${blockClassName}__tab`;
+        this.activeToggleClassName = `${blockClassName}__toggle_active`;
+    }
+
     isEverythingOk () {
         if (this.toggles.length !== this.tabs.length) {
             console.warn('Tabs toggles and tabs amounts are not matching');
@@ -63,7 +81,7 @@ export class Tabs {
             console.warn('There\'s no toggles for tabs');
             return false;
         } else if (this.tabs.length === 0) {
-            console.wark('There\'s no content tabs');
+            console.warn('There\'s no content tabs');
             return false;
         }
         return true;
@@ -72,10 +90,20 @@ export class Tabs {
 
 /**
  * iterates through all matched blocks and initializes tabs classes
- * @param  {String} selector selector for tabs
+ * @param  {String} config selector for tabs
+ * @param  {Object} config {
+ *                             selector: selector for tabs
+ *                             blockClassName: block className (read more about _bem)
+ *                         }
  */
-export default function initTabs(selector) {
+export default function initTabs(config) {
+    var selector;
+    if (typeof config === 'string') {
+        selector = config;
+    } else {
+        var {selector, blockClassName} = config; // doesn't work without 'var'
+    }
     for (let container of document.querySelectorAll(selector)) {
-        new Tabs(container);
+        new Tabs(container, blockClassName);
     }
 }

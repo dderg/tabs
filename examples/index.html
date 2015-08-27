@@ -41,10 +41,29 @@
 		<div class="tabs__tab">tab 1 content</div>
 		<div class="tabs__tab">tab 2 content</div>
 	</div>
+	<div class="customBlock" id="customSelector">
+		<div class="customBlock__toggle customBlock__toggle_active">tab 1</div>
+		<div class="customBlock__toggle">tab 2</div>
+		<div class="customBlock__tab">tab 1 content</div>
+		<div class="customBlock__tab">tab 2 content</div>
+	</div>
+	<div class="tabs anotherCustomSelector">
+		<div class="tabs__toggle tabs__toggle_active">tab 1</div>
+		<div class="tabs__toggle">tab 2</div>
+		<div class="tabs__tab">tab 1 content</div>
+		<div class="tabs__tab">tab 2 content</div>
+	</div>
 	<script type="text/javascript" src="../dist/tabs.es5.js"></script>
 	<script>
 		var initTabs = module.exports['default']; // var initTabs = require('tabs');
 		initTabs('.tabs');
+		initTabs({
+			selector: '#customSelector', 
+			blockClassName: 'customBlock'
+		});
+		initTabs({
+			selector: '.anotherCustomSelector'
+		});
 	</script>
 </body>
 </html>

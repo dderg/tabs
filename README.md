@@ -43,11 +43,24 @@ group tabs with `tabs` block, internal structure does not matter
 import initTabs from 'future-tabs';
 initTabs('.tabs');
 ```
+or
+```javascript
+initTabs({
+	selector: '.tabs',
+	blockClassName: 'tabs' //optional
+})
+```
 
 ### extended usage
 ```javascript
 import {Tabs} from 'future-tabs';
 const tabs = new Tabs(document.querySelector('.tabs'));
+```
+or
+```javascript
+import {Tabs} from 'future-tabs';
+const tabsDiv = document.getElementById('someCustomId');
+new Tabs(tabsDiv, 'tabs'); // 'tabs' here is _bem block class name
 ```
 
 ### build
@@ -57,9 +70,11 @@ gulp
 
 ### todo
 - tests
-- class prefix as an option
 
 ### changelog
+
+#### 1.1.0
+- block class name (prefix) can be set
 
 #### 1.0.0
 - you are welcome to use it and contribute

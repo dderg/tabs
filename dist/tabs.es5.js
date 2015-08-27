@@ -13,8 +13,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var Tab = (function () {
     /**
      * @param  {Tabs}   tabs   Instance of Tabs which contains this tab
-     * @param  {[type]} toggle toggle button
-     * @param  {[type]} tab    block to hide or show
+     * @param  {Dom}    toggle toggle button
+     * @param  {Dom}    tab    block to hide or show
      */
 
     function Tab(tabs, toggle, tab) {
@@ -31,7 +31,7 @@ var Tab = (function () {
         value: function init() {
             var _this = this;
 
-            if (this.toggle.classList.contains('tabs__toggle_active')) {
+            if (this.toggle.classList.contains(this.tabs.activeToggleClassName)) {
                 this.open();
             } else {
                 this.close();
@@ -53,13 +53,13 @@ var Tab = (function () {
             }
             this.tabs.active = this;
             this.tab.style.display = 'block';
-            this.toggle.classList.add('tabs__toggle_active');
+            this.toggle.classList.add(this.tabs.activeToggleClassName);
         }
     }, {
         key: 'close',
         value: function close() {
             this.tab.style.display = 'none';
-            this.toggle.classList.remove('tabs__toggle_active');
+            this.toggle.classList.remove(this.tabs.activeToggleClassName);
         }
     }]);
 
@@ -68,22 +68,30 @@ var Tab = (function () {
 
 var Tabs = (function () {
     function Tabs(container) {
+        var blockClassName = arguments.length <= 1 || arguments[1] === undefined ? 'tabs' : arguments[1];
+
         _classCallCheck(this, Tabs);
 
         this.container = container;
+        this.setClassNames(blockClassName);
+
         this.init();
     }
 
     /**
      * iterates through all matched blocks and initializes tabs classes
-     * @param  {String} selector selector for tabs
+     * @param  {String} config selector for tabs
+     * @param  {Object} config {
+     *                             selector: selector for tabs
+     *                             blockClassName: block className (read more about _bem)
+     *                         }
      */
 
     _createClass(Tabs, [{
         key: 'init',
         value: function init() {
-            this.toggles = this.container.querySelectorAll('.tabs__toggle');
-            this.tabs = this.container.querySelectorAll('.tabs__tab');
+            this.toggles = this.container.querySelectorAll(this.toggleSelector);
+            this.tabs = this.container.querySelectorAll(this.tabSelector);
             if (!this.isEverythingOk()) {
                 return;
             }
@@ -91,6 +99,19 @@ var Tabs = (function () {
             for (var index = 0; index < this.toggles.length; index++) {
                 new Tab(this, this.toggles[index], this.tabs[index]);
             }
+        }
+
+        /**
+         * Initializes classes and selectors for blocks
+         * @param {String} blockClassName 'tabs' by default
+         */
+    }, {
+        key: 'setClassNames',
+        value: function setClassNames(blockClassName) {
+            this.blockClassName = blockClassName;
+            this.toggleSelector = '.' + blockClassName + '__toggle';
+            this.tabSelector = '.' + blockClassName + '__tab';
+            this.activeToggleClassName = blockClassName + '__toggle_active';
         }
     }, {
         key: 'isEverythingOk',
@@ -102,7 +123,7 @@ var Tabs = (function () {
                 console.warn('There\'s no toggles for tabs');
                 return false;
             } else if (this.tabs.length === 0) {
-                console.wark('There\'s no content tabs');
+                console.warn('There\'s no content tabs');
                 return false;
             }
             return true;
@@ -114,7 +135,15 @@ var Tabs = (function () {
 
 exports.Tabs = Tabs;
 
-function initTabs(selector) {
+function initTabs(config) {
+    var selector;
+    if (typeof config === 'string') {
+        selector = config;
+    } else {
+        var selector = config.selector;
+        var blockClassName = config.blockClassName;
+        // doesn't work without 'var'
+    }
     var _iteratorNormalCompletion = true;
     var _didIteratorError = false;
     var _iteratorError = undefined;
@@ -123,7 +152,7 @@ function initTabs(selector) {
         for (var _iterator = document.querySelectorAll(selector)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
             var container = _step.value;
 
-            new Tabs(container);
+            new Tabs(container, blockClassName);
         }
     } catch (err) {
         _didIteratorError = true;
