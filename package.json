@@ -1,6 +1,6 @@
 {
   "name": "future-tabs",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "commonjs / es6 tabs module",
   "main": "dist/tabs.js",
   "directories": {
