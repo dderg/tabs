@@ -1,5 +1,4 @@
 ## Tabs module for es6
-[![github download count](https://img.shields.io/github/downloads/prog666/tabs/latest/total.svg?style=flat)](https://github.com/prog666/tabs)
 [![npm download count](https://img.shields.io/npm/dm/future-tabs.svg?style=flat)](https://www.npmjs.org/package/future-tabs)
 [![Current tag](https://img.shields.io/npm/v/future-tabs.svg?style=flat)](https://www.npmjs.org/package/future-tabs)
 [![Current tag](https://img.shields.io/bower/v/future-tabs.svg?style=flat)](https://github.com/prog666/tabs)
