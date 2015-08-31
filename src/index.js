@@ -32,18 +32,18 @@ class Tab {
             this.tabs.active.close();
         }
         this.tabs.active = this;
-        this.tab.style.display = 'block';
+        this.tab.style.display = `block`;
         this.toggle.classList.add(this.tabs.activeToggleClassName);
     }
 
     close () {
-        this.tab.style.display = 'none';
+        this.tab.style.display = `none`;
         this.toggle.classList.remove(this.tabs.activeToggleClassName);
     }
 }
 
 export class Tabs {
-    constructor (container, blockClassName = 'tabs') {
+    constructor (container, blockClassName = `tabs`) {
         this.container = container;
         this.setClassNames(blockClassName);
 
@@ -75,13 +75,13 @@ export class Tabs {
 
     isEverythingOk () {
         if (this.toggles.length !== this.tabs.length) {
-            console.warn('Tabs toggles and tabs amounts are not matching');
+            console.warn(`Tabs toggles and tabs amounts are not matching`);
             return false;
         } else if (this.toggles.length === 0) {
-            console.warn('There\'s no toggles for tabs');
+            console.warn(`There's no toggles for tabs`);
             return false;
         } else if (this.tabs.length === 0) {
-            console.warn('There\'s no content tabs');
+            console.warn(`There's no content tabs`);
             return false;
         }
         return true;
@@ -98,7 +98,7 @@ export class Tabs {
  */
 export default function initTabs(config) {
     var selector;
-    if (typeof config === 'string') {
+    if (typeof config === `string`) {
         selector = config;
     } else {
         var {selector, blockClassName} = config; // doesn't work without 'var'
