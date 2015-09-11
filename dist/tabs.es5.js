@@ -31,6 +31,11 @@ var Tab = (function () {
         value: function init() {
             var _this = this;
 
+            this.src = this.tab.getAttribute('data-src');
+            if (this.src !== null) {
+                this.hasToBeLoaded = true;
+            }
+
             if (this.toggle.classList.contains(this.tabs.activeToggleClassName)) {
                 this.open();
             } else {
@@ -42,11 +47,32 @@ var Tab = (function () {
             });
         }
     }, {
+        key: 'load',
+        value: function load() {
+            var _this2 = this;
+
+            var xhr = new XMLHttpRequest();
+            this.hasToBeLoaded = false;
+            xhr.open('GET', encodeURI(this.src));
+            xhr.onload = function () {
+                if (xhr.status === 200 || xhr.status === 304) {
+                    console.log('loaded');
+                    _this2.tab.innerHTML = xhr.responseText;
+                } else {
+                    _this2.hasToBeLoaded = true;
+                }
+            };
+            xhr.send();
+        }
+    }, {
         key: 'open',
         value: function open() {
             if (this.tabs.active === this) {
                 // already open
                 return;
+            }
+            if (this.hasToBeLoaded) {
+                this.load();
             }
             if (this.tabs.active) {
                 this.tabs.active.close();

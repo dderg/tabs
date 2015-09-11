@@ -37,6 +37,17 @@ group tabs with `tabs` block, internal structure does not matter
 </div>
 ```
 
+### lazy load
+```html
+<div class="tabs">
+	<div class="tabs__toggle tabs__toggle_active">tab 1</div>
+	<div class="tabs__toggle">tab 2</div>
+	<div class="tabs__tab">tab 1 content</div>
+	<div class="tabs__tab" data-src="path/to/contentToBeLoaded">preloader</div>
+</div>
+
+```
+
 ### simple usage
 ```javascript
 import initTabs from 'future-tabs';
@@ -71,6 +82,9 @@ gulp
 - tests
 
 ### changelog
+
+#### 1.2.0
+- lazy load
 
 #### 1.1.0
 - block class name (prefix) can be set
