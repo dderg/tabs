@@ -6,6 +6,20 @@ var jscs = require('gulp-jscs');
 var stylish = require('gulp-jscs-stylish');
 var uglify = require('gulp-uglify');
 var noop = function () {};
+var connect = require('gulp-connect');
+
+gulp.task('connect', function () {
+    return connect.server({
+        root: 'examples',
+        livereload: true,
+        port: 1337
+    });
+});
+
+gulp.task('html', function () {
+    return gulp.src('./examples/*')
+        .pipe(connect.reload());
+});
 
 gulp.task('babel', function () {
     return gulp.src('./src/index.js')
@@ -28,11 +42,13 @@ gulp.task('babel', function () {
         .pipe(gulp.dest('./dist'))
         .pipe(uglify())
         .pipe(rename('tabs.es5.min.js'))
-        .pipe(gulp.dest('./dist'));
+        .pipe(gulp.dest('./dist'))
+        .pipe(connect.reload());
 });
 
 gulp.task('watch', function () {
-    return gulp.watch('./src/index.js', ['babel'])
+    gulp.watch('./examples/*', ['html']);
+    return gulp.watch('./src/index.js', ['babel']);
 });
 
-gulp.task('default', ['babel', 'watch']);
+gulp.task('default', ['connect', 'html', 'babel', 'watch']);
