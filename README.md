@@ -4,11 +4,11 @@
 [![Current tag](https://img.shields.io/bower/v/future-tabs.svg?style=flat)](https://github.com/prog666/tabs)
 [![Issues closed](http://issuestats.com/github/prog666/tabs/badge/issue?style=flat)](http://issuestats.com/github/prog666/tabs)
 
-## features
+## Features
 * Nested tabs
 * Lazy load
-* no dependencies
-* es6 support (use babel)
+* No dependencies
+* ES2015 support (use babel)
 
 if you need IE9 support, it should work (i didn't test yet) with [classList polyfill](https://github.com/eligrey/classList.js/)
 
@@ -22,17 +22,17 @@ there's also [gulp version](https://github.com/deepak1556/gulp-browserify)
 [simple demo](http://front-end.fmake.ru/future-tabs/examples/)
 
 
-## install
-### with npm
+## Install
+### npm
 ```bash
 npm i -S future-tabs
 ```
-### with bower
+### bower
 ```bash
 bower i -S future-tabs
 ```
 
-## markup
+## Markup
 group tabs with `tabs` block, internal structure does not matter
 ```html
 <div class="tabs">
@@ -43,7 +43,7 @@ group tabs with `tabs` block, internal structure does not matter
 </div>
 ```
 
-## lazy load
+## Lazy Load
 ```html
 <div class="tabs">
 	<div class="tabs__toggle tabs__toggle_active">tab 1</div>
@@ -54,7 +54,7 @@ group tabs with `tabs` block, internal structure does not matter
 
 ```
 
-## simple usage
+## Simple usage
 ```javascript
 import initTabs from 'future-tabs';
 initTabs('.tabs');
@@ -67,7 +67,7 @@ initTabs({
 })
 ```
 
-## extended usage
+## Extended usage
 ```javascript
 import {Tabs} from 'future-tabs';
 const tabs = new Tabs(document.querySelector('.tabs'));
@@ -79,7 +79,7 @@ const tabsDiv = document.getElementById('someCustomId');
 new Tabs(tabsDiv, 'tabs'); // 'tabs' here is _bem block class name
 ```
 
-## build
+## Build
 ```bash
 gulp
 ```
@@ -87,7 +87,7 @@ gulp
 ## todo
 - tests
 
-## changelog
+## Changelog
 
 ### 1.3.0
 - nested tabs
