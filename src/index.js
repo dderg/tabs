@@ -34,11 +34,13 @@ class Tab {
         xhr.open('GET', encodeURI(this.src));
         xhr.onload = () => {
             if (xhr.status === 200 || xhr.status === 304) {
-                console.log('loaded');
                 this.tab.innerHTML = xhr.responseText;
             } else {
                 this.hasToBeLoaded = true;
             }
+        };
+        xhr.onerror = (error) => {
+            console.error(error);
         };
         xhr.send();
     }

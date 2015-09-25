@@ -56,11 +56,13 @@ var Tab = (function () {
             xhr.open('GET', encodeURI(this.src));
             xhr.onload = function () {
                 if (xhr.status === 200 || xhr.status === 304) {
-                    console.log('loaded');
                     _this2.tab.innerHTML = xhr.responseText;
                 } else {
                     _this2.hasToBeLoaded = true;
                 }
+            };
+            xhr.onerror = function (error) {
+                console.error(error);
             };
             xhr.send();
         }
