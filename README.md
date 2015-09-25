@@ -1,10 +1,16 @@
-## Tabs module for es6
+# Tabs module for es6
 [![npm download count](https://img.shields.io/npm/dm/future-tabs.svg?style=flat)](https://www.npmjs.org/package/future-tabs)
 [![Current tag](https://img.shields.io/npm/v/future-tabs.svg?style=flat)](https://www.npmjs.org/package/future-tabs)
 [![Current tag](https://img.shields.io/bower/v/future-tabs.svg?style=flat)](https://github.com/prog666/tabs)
 [![Issues closed](http://issuestats.com/github/prog666/tabs/badge/issue?style=flat)](http://issuestats.com/github/prog666/tabs)
 
-no dependencies, if you need IE9 support, it should work (i didn't test yet) with [classList polyfill](https://github.com/eligrey/classList.js/)
+## features
+* Nested tabs
+* Lazy load
+* no dependencies
+* es6 support (use babel)
+
+if you need IE9 support, it should work (i didn't test yet) with [classList polyfill](https://github.com/eligrey/classList.js/)
 
 if you need es5 support use tabs.es5.js version
 
@@ -16,17 +22,17 @@ there's also [gulp version](https://github.com/deepak1556/gulp-browserify)
 [simple demo](http://front-end.fmake.ru/future-tabs/examples/)
 
 
-### install
-#### with npm
+## install
+### with npm
 ```bash
 npm i -S future-tabs
 ```
-#### with bower
+### with bower
 ```bash
 bower i -S future-tabs
 ```
 
-### markup
+## markup
 group tabs with `tabs` block, internal structure does not matter
 ```html
 <div class="tabs">
@@ -37,7 +43,7 @@ group tabs with `tabs` block, internal structure does not matter
 </div>
 ```
 
-### lazy load
+## lazy load
 ```html
 <div class="tabs">
 	<div class="tabs__toggle tabs__toggle_active">tab 1</div>
@@ -48,7 +54,7 @@ group tabs with `tabs` block, internal structure does not matter
 
 ```
 
-### simple usage
+## simple usage
 ```javascript
 import initTabs from 'future-tabs';
 initTabs('.tabs');
@@ -61,7 +67,7 @@ initTabs({
 })
 ```
 
-### extended usage
+## extended usage
 ```javascript
 import {Tabs} from 'future-tabs';
 const tabs = new Tabs(document.querySelector('.tabs'));
@@ -73,17 +79,23 @@ const tabsDiv = document.getElementById('someCustomId');
 new Tabs(tabsDiv, 'tabs'); // 'tabs' here is _bem block class name
 ```
 
-### build
+## build
 ```bash
 gulp
 ```
 
-### todo
+## todo
 - tests
 
-### changelog
+## changelog
 
-#### 1.2.0
+### 1.3.0
+- nested tabs
+
+### 1.2.1
+- xhr error output to console
+
+### 1.2.0
 - lazy load
 
 #### 1.1.0
