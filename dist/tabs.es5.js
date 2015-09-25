@@ -1,3 +1,4 @@
+// Element.closest polyfill
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -9,6 +10,33 @@ var _createClass = (function () { function defineProperties(target, props) { for
 exports['default'] = initTabs;
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+(function (e) {
+    e.closest || assign();
+    function assign() {
+        e.closest = function closest(_x2) {
+            var _this = this;
+
+            var _again = true;
+
+            _function: while (_again) {
+                var css = _x2;
+                _again = false;
+                if (_this.parentNode) {
+                    if (_this.matches(css)) {
+                        return _this;
+                    } else {
+                        _x2 = css;
+                        _again = true;
+                        continue _function;
+                    }
+                } else {
+                    return null;
+                }
+            }
+        };
+    }
+})(Element.prototype);
 
 var Tab = (function () {
     /**
@@ -29,7 +57,7 @@ var Tab = (function () {
     _createClass(Tab, [{
         key: 'init',
         value: function init() {
-            var _this = this;
+            var _this2 = this;
 
             this.src = this.tab.getAttribute('data-src');
             if (this.src !== null) {
@@ -43,22 +71,22 @@ var Tab = (function () {
             }
 
             this.toggle.addEventListener('click', function () {
-                _this.open();
+                _this2.open();
             });
         }
     }, {
         key: 'load',
         value: function load() {
-            var _this2 = this;
+            var _this3 = this;
 
             var xhr = new XMLHttpRequest();
             this.hasToBeLoaded = false;
             xhr.open('GET', encodeURI(this.src));
             xhr.onload = function () {
                 if (xhr.status === 200 || xhr.status === 304) {
-                    _this2.tab.innerHTML = xhr.responseText;
+                    _this3.tab.innerHTML = xhr.responseText;
                 } else {
-                    _this2.hasToBeLoaded = true;
+                    _this3.hasToBeLoaded = true;
                 }
             };
             xhr.onerror = function (error) {
@@ -102,7 +130,6 @@ var Tabs = (function () {
 
         this.container = container;
         this.setClassNames(blockClassName);
-
         this.init();
     }
 
@@ -118,8 +145,14 @@ var Tabs = (function () {
     _createClass(Tabs, [{
         key: 'init',
         value: function init() {
-            this.toggles = this.container.querySelectorAll(this.toggleSelector);
-            this.tabs = this.container.querySelectorAll(this.tabSelector);
+            var _this4 = this;
+
+            var filter = function filter(element) {
+                return element.closest('.' + _this4.blockClassName) === _this4.container;
+            };
+            this.toggles = Array.from(this.container.querySelectorAll(this.toggleSelector)).filter(filter);
+            this.tabs = Array.from(this.container.querySelectorAll(this.tabSelector)).filter(filter);
+
             if (!this.isEverythingOk()) {
                 return;
             }

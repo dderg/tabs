@@ -1,3 +1,13 @@
+// Element.closest polyfill
+((e) => {
+    e.closest || assign();
+    function assign() {
+        e.closest = function closest(css) {
+            return this.parentNode ? (this.matches(css) ? this : closest.call(this.parentNode, css)) : null;
+        };
+    }
+})(Element.prototype);
+
 class Tab {
     /**
      * @param  {Tabs}   tabs   Instance of Tabs which contains this tab
@@ -71,13 +81,14 @@ export class Tabs {
     constructor (container, blockClassName = `tabs`) {
         this.container = container;
         this.setClassNames(blockClassName);
-
         this.init();
     }
 
     init () {
-        this.toggles = this.container.querySelectorAll(this.toggleSelector);
-        this.tabs = this.container.querySelectorAll(this.tabSelector);
+        const filter = element => element.closest(`.${this.blockClassName}`) === this.container;
+        this.toggles = Array.from(this.container.querySelectorAll(this.toggleSelector)).filter(filter);
+        this.tabs = Array.from(this.container.querySelectorAll(this.tabSelector)).filter(filter);
+
         if (!this.isEverythingOk()) {
             return;
         }
