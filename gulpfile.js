@@ -7,6 +7,8 @@ var stylish = require('gulp-jscs-stylish');
 var uglify = require('gulp-uglify');
 var noop = function () {};
 var connect = require('gulp-connect');
+var jasmine = require('gulp-jasmine');
+var reporters = require('jasmine-reporters');
 
 gulp.task('connect', function () {
     return connect.server({
@@ -51,3 +53,10 @@ gulp.task('watch', function () {
 });
 
 gulp.task('default', ['connect', 'html', 'babel', 'watch']);
+
+gulp.task('test', function () {
+    return gulp.src('test/test.js')
+        .pipe(jasmine({
+            reporter: new reporters.JUnitXmlReporter()
+        }));
+});

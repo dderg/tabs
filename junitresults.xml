@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+ <testsuite name="A suite" timestamp="2015-09-25T11:50:15" hostname="localhost" time="0.006" errors="0" tests="1" skipped="0" disabled="0" failures="1">
+  <testcase classname="A suite" name="should throw error" time="0.005">
+   <failure type="toBe" message="Expected true to be false."><![CDATA[Error: Expected true to be false.
+    at stack (/home/prog/projects/tabs/node_modules/gulp-jasmine/node_modules/jasmine/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:1482:17)
+    at buildExpectationResult (/home/prog/projects/tabs/node_modules/gulp-jasmine/node_modules/jasmine/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:1452:14)
+    at Spec.Env.expectationResultFactory (/home/prog/projects/tabs/node_modules/gulp-jasmine/node_modules/jasmine/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:583:18)
+    at Spec.addExpectationResult (/home/prog/projects/tabs/node_modules/gulp-jasmine/node_modules/jasmine/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:324:34)
+    at Expectation.addExpectationResult (/home/prog/projects/tabs/node_modules/gulp-jasmine/node_modules/jasmine/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:533:21)
+    at Expectation.toBe (/home/prog/projects/tabs/node_modules/gulp-jasmine/node_modules/jasmine/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:1406:12)
+    at Object.<anonymous> (/home/prog/projects/tabs/test/test.js:3:22)
+    at attemptSync (/home/prog/projects/tabs/node_modules/gulp-jasmine/node_modules/jasmine/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:1789:24)
+    at QueueRunner.run (/home/prog/projects/tabs/node_modules/gulp-jasmine/node_modules/jasmine/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:1777:9)
+    at QueueRunner.execute (/home/prog/projects/tabs/node_modules/gulp-jasmine/node_modules/jasmine/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:1762:10)]]>
+   </failure>
+  </testcase>
+ </testsuite>
+</testsuites>
