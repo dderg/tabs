@@ -6,7 +6,7 @@
     "Danila Dergachev <gnomdan@yandex.ru>"
   ],
   "description": "es6/commonjs tabs module",
-  "main": "/dist/tabs.js",
+  "main": "dist/tabs.js",
   "keywords": [
     "tabs",
     "javascript",
