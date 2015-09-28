@@ -79,6 +79,14 @@ const tabsDiv = document.getElementById('someCustomId');
 new Tabs(tabsDiv, 'tabs'); // 'tabs' here is _bem block class name
 ```
 
+## If you don't use commonjs build system (like browserify or webpack) you should add this before script
+```html
+<script>
+	var module = {exports: {}};
+	var exports = module.exports;
+</script>
+```
+
 ## Build
 ```bash
 gulp
