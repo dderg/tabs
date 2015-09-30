@@ -4,6 +4,9 @@
 [![Current tag](https://img.shields.io/bower/v/future-tabs.svg?style=flat)](https://github.com/prog666/tabs)
 [![Issues closed](http://issuestats.com/github/prog666/tabs/badge/issue?style=flat)](http://issuestats.com/github/prog666/tabs)
 
+## Requirements
+* if you want ES5 support you have to use [babel](https://babeljs.io/) or [browserify](http://browserify.org/) with [babelify extension](https://github.com/babel/babelify)
+
 ## Features
 * Nested tabs
 * Lazy load
@@ -11,13 +14,6 @@
 * ES2015 support (use babel)
 
 if you need IE9 support, it should work (i didn't test yet) with [classList polyfill](https://github.com/eligrey/classList.js/)
-
-if you need es5 support use tabs.es5.js version
-
-use [browserify](http://browserify.org/) with [babelify extension](https://github.com/babel/babelify)
-
-there's also [gulp version](https://github.com/deepak1556/gulp-browserify)
-
 
 [simple demo](http://front-end.fmake.ru/future-tabs/examples/)
 
