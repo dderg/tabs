@@ -79,6 +79,16 @@ const tabsDiv = document.getElementById('someCustomId');
 new Tabs(tabsDiv, 'tabs'); // 'tabs' here is _bem block class name
 ```
 
+## Destroy
+```javascript
+const tabs = new Tabs(DOMElement);
+tabs.destroy();
+```
+if you want to init again just do
+```javascript
+tabs.init();
+```
+
 ## If you don't use commonjs build system (like browserify or webpack) you should add this before script
 ```html
 <script>
@@ -97,14 +107,17 @@ gulp
 
 ## Changelog
 
+### 1.3.2
+- add destroy method #5
+
 ### 1.3.0
-- nested tabs
+- add nested tabs
 
 ### 1.2.1
 - xhr error output to console
 
 ### 1.2.0
-- lazy load
+- add lazy load
 
 #### 1.1.0
 - block class name (prefix) can be set

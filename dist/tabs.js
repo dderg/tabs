@@ -18,10 +18,6 @@ class Tab {
         this.tabs = tabs;
         this.toggle = toggle;
         this.tab = tab;
-        this.init();
-    }
-
-    init () {
         this.src = this.tab.getAttribute('data-src');
         if (this.src !== null) {
             this.hasToBeLoaded = true;
@@ -32,13 +28,16 @@ class Tab {
         } else {
             this.close();
         }
+        this.init();
+    }
 
-        this.toggle.addEventListener('click', () => {
-            this.open();
-        });
+    init () {
+        this.open = this.open.bind(this); // needed for removeEventListener
+        this.toggle.addEventListener('click', this.open);
     }
 
     load () {
+        // @todo: use fetch() function
         let xhr = new XMLHttpRequest();
         this.hasToBeLoaded = false;
         xhr.open('GET', encodeURI(this.src));
@@ -75,6 +74,10 @@ class Tab {
         this.tab.style.display = `none`;
         this.toggle.classList.remove(this.tabs.activeToggleClassName);
     }
+
+    destroy () {
+        this.toggle.removeEventListener('click', this.open);
+    }
 }
 
 export class Tabs {
@@ -88,13 +91,14 @@ export class Tabs {
         const filter = element => element.closest(`.${this.blockClassName}`) === this.container;
         this.toggles = Array.from(this.container.querySelectorAll(this.toggleSelector)).filter(filter);
         this.tabs = Array.from(this.container.querySelectorAll(this.tabSelector)).filter(filter);
-
+        this.initedTabs = [];
         if (!this.isEverythingOk()) {
             return;
         }
 
         for (let index = 0; index < this.toggles.length; index++) {
-            new Tab (this, this.toggles[index], this.tabs[index]);
+            let tab = new Tab (this, this.toggles[index], this.tabs[index]);
+            this.initedTabs.push(tab);
         }
     }
 
@@ -122,6 +126,13 @@ export class Tabs {
         }
         return true;
     }
+
+    destroy () {
+        var tab;
+        while (tab = this.initedTabs.pop()) {
+            tab.destroy();
+        }
+    }
 }
 
 /**
@@ -140,6 +151,6 @@ export default function initTabs(config) {
         var {selector, blockClassName} = config; // doesn't work without 'var'
     }
     for (let container of document.querySelectorAll(selector)) {
-        new Tabs(container, blockClassName);
+        let tabs = new Tabs(container, blockClassName);
     }
 }

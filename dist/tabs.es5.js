@@ -51,42 +51,39 @@ var Tab = (function () {
         this.tabs = tabs;
         this.toggle = toggle;
         this.tab = tab;
+        this.src = this.tab.getAttribute('data-src');
+        if (this.src !== null) {
+            this.hasToBeLoaded = true;
+        }
+
+        if (this.toggle.classList.contains(this.tabs.activeToggleClassName)) {
+            this.open();
+        } else {
+            this.close();
+        }
         this.init();
     }
 
     _createClass(Tab, [{
         key: 'init',
         value: function init() {
-            var _this2 = this;
-
-            this.src = this.tab.getAttribute('data-src');
-            if (this.src !== null) {
-                this.hasToBeLoaded = true;
-            }
-
-            if (this.toggle.classList.contains(this.tabs.activeToggleClassName)) {
-                this.open();
-            } else {
-                this.close();
-            }
-
-            this.toggle.addEventListener('click', function () {
-                _this2.open();
-            });
+            this.open = this.open.bind(this); // needed for removeEventListener
+            this.toggle.addEventListener('click', this.open);
         }
     }, {
         key: 'load',
         value: function load() {
-            var _this3 = this;
+            var _this2 = this;
 
+            // @todo: use fetch() function
             var xhr = new XMLHttpRequest();
             this.hasToBeLoaded = false;
             xhr.open('GET', encodeURI(this.src));
             xhr.onload = function () {
                 if (xhr.status === 200 || xhr.status === 304) {
-                    _this3.tab.innerHTML = xhr.responseText;
+                    _this2.tab.innerHTML = xhr.responseText;
                 } else {
-                    _this3.hasToBeLoaded = true;
+                    _this2.hasToBeLoaded = true;
                 }
             };
             xhr.onerror = function (error) {
@@ -117,6 +114,11 @@ var Tab = (function () {
             this.tab.style.display = 'none';
             this.toggle.classList.remove(this.tabs.activeToggleClassName);
         }
+    }, {
+        key: 'destroy',
+        value: function destroy() {
+            this.toggle.removeEventListener('click', this.open);
+        }
     }]);
 
     return Tab;
@@ -145,20 +147,21 @@ var Tabs = (function () {
     _createClass(Tabs, [{
         key: 'init',
         value: function init() {
-            var _this4 = this;
+            var _this3 = this;
 
             var filter = function filter(element) {
-                return element.closest('.' + _this4.blockClassName) === _this4.container;
+                return element.closest('.' + _this3.blockClassName) === _this3.container;
             };
             this.toggles = Array.from(this.container.querySelectorAll(this.toggleSelector)).filter(filter);
             this.tabs = Array.from(this.container.querySelectorAll(this.tabSelector)).filter(filter);
-
+            this.initedTabs = [];
             if (!this.isEverythingOk()) {
                 return;
             }
 
             for (var index = 0; index < this.toggles.length; index++) {
-                new Tab(this, this.toggles[index], this.tabs[index]);
+                var tab = new Tab(this, this.toggles[index], this.tabs[index]);
+                this.initedTabs.push(tab);
             }
         }
 
@@ -189,6 +192,14 @@ var Tabs = (function () {
             }
             return true;
         }
+    }, {
+        key: 'destroy',
+        value: function destroy() {
+            var tab;
+            while (tab = this.initedTabs.pop()) {
+                tab.destroy();
+            }
+        }
     }]);
 
     return Tabs;
@@ -213,7 +224,7 @@ function initTabs(config) {
         for (var _iterator = document.querySelectorAll(selector)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
             var container = _step.value;
 
-            new Tabs(container, blockClassName);
+            var tabs = new Tabs(container, blockClassName);
         }
     } catch (err) {
         _didIteratorError = true;
