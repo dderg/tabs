@@ -3,6 +3,7 @@
 [![Current tag](https://img.shields.io/npm/v/future-tabs.svg?style=flat)](https://www.npmjs.org/package/future-tabs)
 [![Current tag](https://img.shields.io/bower/v/future-tabs.svg?style=flat)](https://github.com/prog666/tabs)
 [![Issues closed](http://issuestats.com/github/prog666/tabs/badge/issue?style=flat)](http://issuestats.com/github/prog666/tabs)
+[![Dependency Status](https://www.versioneye.com/javascript/prog666:future-tabs/badge.svg)](https://www.versioneye.com/javascript/prog666:future-tabs/)
 
 ## Requirements
 * if you want ES5 support you have to use [babel](https://babeljs.io/) or [browserify](http://browserify.org/) with [babelify extension](https://github.com/babel/babelify)
